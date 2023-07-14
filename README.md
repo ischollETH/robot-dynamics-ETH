@@ -4,8 +4,12 @@ MATLAB/Simulink Exercises for the class 'Robot Dynamics' (Prof. Marco Hutter) @E
 Credit for the exercises' setup, descriptions and skeleton codes goes to Prof. Hutter and his teaching assistants.
 
 ## Exercise 1: Forward, Differential and Inverse Kinematics of the ABB IRB 120
-The aim of this exercise was to calculate the forward, differential and inverse kinematics of the 6-link ABB IRB 120 robot arm with fixed base. This helped practice the use of different representations of the end-fector's orientation as well as provided a tool to check whether practical implementations of the kinematics were correct. The task was to implement the functions for computing the forward and inverse kinematics using symbolic and numerical computations in MATLAB. A separate MATLAB script allowed to visualize the robot arm in 3D.
+The aim of this exercise was to calculate the forward, differential and inverse kinematics of the 6-link ABB IRB 120 robot arm with fixed base seen below (with and without associated Cartesian frames). This helped practice the use of different representations of the end-fector's orientation as well as provided a tool to check whether practical implementations of the kinematics were correct. The task was to implement the functions for computing the forward and inverse kinematics using symbolic and numerical computations in MATLAB. A separate MATLAB script allowed to visualize the robot arm in 3D.
 
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/ABB_IRB_120.PNG width="350" title="ABB IRB 120 Robot Arm">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/ABB_IRB_120_Frames.PNG width="350" title="ABB IRB 120 Robot Arm with associated Cartesian frames">
+</p>
 
 ### Exercise 1a: Forward Kinematics of the ABB IRB 120
 1) Deefining a vector q of generalized coordinates (arm joint angles) to describe the configuration of the ABB IRB120. The generalized coordinates should be complete (fully describe the configuration of the robot while at the same time comprising a minimal set of coordinates) and independent (each generalized coordinate must not be a function of any of the others).
@@ -27,8 +31,44 @@ versa, quaternion multiplication and passive rotation of a vector with a given q
 ### Exercise 1: Result
 As a result of implementating all the kinematics correctly, an animation of the robot accurately following a desired path and linear velocity can be seen hereafter:
 <p align="center">
-  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex1c.gif width="350" title="Ex1 Result Path Following Robot Arm">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex1c.gif width="700" title="Ex1 Result Path Following Robot Arm">
 </p>
 
-## Exercise 2: 
+## Exercise 2: Dynamics and Model-based control of the ABB IRB 120
+The aim of this exercise was to develop a tool which implements the equations of motion for the same ABB robot arm, as well as implementing control algorithms focused on model-based control schemes.
+
+## Exercise 2a: Dynamics of the ABB IRB 120
+1) Generating all the quantities (mass matrix, Coriolis, centrifugal and gravity terms) which are used in the equations of motion, as well as
+the total mechanical energy of the system. 
+2) This can be validated via the calculation and tracking of the total energy (= Hamiltonian, e.g., if no external forces are acting on the system, the total mechanical energy should remain constant over time).
+
+The following visualizes the robot moving when certain torques are applied to different joints, with the corresponding effect on the total energy:<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2a.gif width="700" title="Ex2a Result Robot Arm Torques and Total Energy">
+</p>
+
+## Exercise 2a: Dynamics of the ABB IRB 120
+1) Generating all the quantities (mass matrix, Coriolis, centrifugal and gravity terms) which are used in the equations of motion, as well as
+the total mechanical energy of the system. 
+2) This can be validated via the calculation and tracking of the total energy (= Hamiltonian, e.g., if no external forces are acting on the system, the total mechanical energy should remain constant over time).
+
+The following visualizes the robot moving when certain torques are applied to different joints, with the corresponding effect on the total energy:
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2a.gif width="700" title="Ex2a Result Robot Arm Torques and Total Energy">
+</p>
+
+## Exercise 2b: Model-based control of the ABB IRB 120
+Coding of three controllers which use the dynamic model of the arm to perform motion and force tracking tasks:
+1) Joint space control: a controller which compensates for the gravitational terms, and tracks a desired joint-space configuration as well as provides damping which is proportional to the measured joint velocities. Visualized in the following:
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_JointSpace.gif width="350" title="Ex2b Joint Space Controller on Robot Arm">
+</p>
+2) Inverse dynamics control: a controller which uses an operational-space inverse dynamics algorithm, i.e. a controller which compensates for the entire dynamics and tracks a desired motion in the operational space. Visualized in the following:
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_InverseDynamicsControl.gif width="350" title="Ex2b Inverse Dynamics Controller on Robot Arm">
+</p>
+3) Hybrid force and motion control: a controller which is able to control both motion and force in orthogonal directions by the use of appropriate selection matrices. As shown in the figure below, there is a window at x = 0.1m. The controller should wipe the window. by applying a constant force on the wall in the x-axis and following a trajectory defined on the y-z plane, using the equations of motion projected to the operational space. Scenario and result visualized in the following:
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_HybridForceMotionControl_Illustration.PNG width="350" title="Hybrid Force an Motion Control Scenario">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_HybridForceMotionControl.gif width="350" title="Ex2b Hybrid Force and Motion Controller on Robot Arm">
+</p>
 
