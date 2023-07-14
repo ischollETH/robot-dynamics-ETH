@@ -7,8 +7,8 @@ Credit for the exercises' setup, descriptions and skeleton codes goes to Prof. H
 The aim of this exercise was to calculate the forward, differential and inverse kinematics of the 6-link ABB IRB 120 robot arm with fixed base seen below (with and without associated Cartesian frames). This helped practice the use of different representations of the end-fector's orientation as well as provided a tool to check whether practical implementations of the kinematics were correct. The task was to implement the functions for computing the forward and inverse kinematics using symbolic and numerical computations in MATLAB. A separate MATLAB script allowed to visualize the robot arm in 3D.
 
 <p align="center">
-  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/ABB_IRB_120.PNG width="350" title="ABB IRB 120 Robot Arm">
-  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/ABB_IRB_120_Frames.PNG width="350" title="ABB IRB 120 Robot Arm with associated Cartesian frames">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/ABB_IRB_120.PNG height="250" title="ABB IRB 120 Robot Arm">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/ABB_IRB_120_Frames.PNG height="250" title="ABB IRB 120 Robot Arm with associated Cartesian frames">
 </p>
 
 ### Exercise 1a: Forward Kinematics of the ABB IRB 120
@@ -60,15 +60,15 @@ The following visualizes the robot moving when certain torques are applied to di
 Coding of three controllers which use the dynamic model of the arm to perform motion and force tracking tasks:
 1) Joint space control: a controller which compensates for the gravitational terms, and tracks a desired joint-space configuration as well as provides damping which is proportional to the measured joint velocities. Visualized in the following:
 <p align="center">
-  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_JointSpace.gif width="350" title="Ex2b Joint Space Controller on Robot Arm">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_JointSpace.gif width="700" title="Ex2b Joint Space Controller on Robot Arm">
 </p>
 2) Inverse dynamics control: a controller which uses an operational-space inverse dynamics algorithm, i.e. a controller which compensates for the entire dynamics and tracks a desired motion in the operational space. Visualized in the following:
 <p align="center">
-  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_InverseDynamicsControl.gif width="350" title="Ex2b Inverse Dynamics Controller on Robot Arm">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_InverseDynamicsControl.gif width="700" title="Ex2b Inverse Dynamics Controller on Robot Arm">
 </p>
 3) Hybrid force and motion control: a controller which is able to control both motion and force in orthogonal directions by the use of appropriate selection matrices. As shown in the figure below, there is a window at x = 0.1m. The controller should wipe the window. by applying a constant force on the wall in the x-axis and following a trajectory defined on the y-z plane, using the equations of motion projected to the operational space. Scenario and result visualized in the following:
 <p align="center">
-  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_HybridForceMotionControl_Illustration.PNG width="350" title="Hybrid Force an Motion Control Scenario">
-  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_HybridForceMotionControl.gif width="350" title="Ex2b Hybrid Force and Motion Controller on Robot Arm">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_HybridForceMotionControl_Illustration.PNG height="250" title="Hybrid Force an Motion Control Scenario">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_HybridForceMotionControl.gif height="250" title="Ex2b Hybrid Force and Motion Controller on Robot Arm">
 </p>
 
