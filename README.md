@@ -8,7 +8,7 @@ The aim of this exercise was to calculate the forward, differential and inverse 
 
 
 ### Exercise 1a: Forward Kinematics of the ABB IRB 120
-1) Defining a vector q of generalized coordinates (arm joint angles) to describe the configuration of the ABB IRB120. The generalized coordinates should be complete (fully describe the configuration of the robot while at the same time comprising a minimal set of coordinates) and independent (each generalized coordinate must not be a function of any of the others).
+1) Deefining a vector q of generalized coordinates (arm joint angles) to describe the configuration of the ABB IRB120. The generalized coordinates should be complete (fully describe the configuration of the robot while at the same time comprising a minimal set of coordinates) and independent (each generalized coordinate must not be a function of any of the others).
 2) Computing the homogeneous transformation matrices between the inertial frame (I), the base frame (0), all joint frames (1-6) as well as the end-effector frame (E).
 3) Finding the function for calculating the end-effector position vector.
 4) Finding the end-effector position vector for some specific vector q of generalized coordinates.
@@ -21,8 +21,8 @@ versa, quaternion multiplication and passive rotation of a vector with a given q
 2) Deriving the mapping between the generalized velocities q and the end-effector twist, namely the basic or geometric Jacobian, via derivation of the translational and rotational Jacobians of the end-effector, depending on the minimal coordinates q only.
 
 ### Exercise 1c: Inverse Kinematics of the ABB IRB 120
-1) Implementing the iterative inverse kinematics algorithm (finding the joint space configuration q which corresponds to some desired pose), robust against the case for which the rotation is identity, i.e. the rotation angle is zero.
-2) Using of the iterative inverse kinematics method from 1) to implement a basic end-effector pose controller for the ABB manipulator. The controller acts only on a kinematic level, i.e. it produces end-effector velocities as a function of the current and desired end-effector pose. This is essentially a kinematic motion control scheme which tracks a series of points defining a trajectory in the task-space of the robot. This includes deriving the following functional modules: a) A trajectory generator defining a discretized path that the end-effector should track and b) a kinematics-level simulator generating an updated configuration of the robot at each time-step which is then provided to the visualization for rendering.
+1) Implementing the iterative inverse kinematics algorithm (finding the joint space configuration q which corresponds to some desired pose), robust against the case for which the rotation is identity, i.e. the rotation angle is zero.
+2) Using of the iterative inverse kinematics method from 1) to implement a basic end-effector pose controller for the ABB manipulator. The controller acts only on a kinematic level, i.e. it produces end-effector velocities as a function of the current and desired end-effector pose. This is essentially a kinematic motion control scheme which tracks a series of points defining a trajectory in the task-space of the robot. This includes deriving the following functional modules: a) A trajectory generator defining a discretized path that the end-effector should track and b) a kinematics-level simulator generating an updated configuration of the robot at each time-step which is then provided to the visualization for rendering.
 
 ### Exercise 1: Result
 As a result of implementating all the kinematics correctly, an animation of the robot accurately following a desired path and linear velocity can be seen hereafter:
