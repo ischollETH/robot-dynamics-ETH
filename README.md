@@ -3,6 +3,7 @@ MATLAB/Simulink Exercises for the class 'Robot Dynamics' (Prof. Marco Hutter) @E
 
 Credit for the exercises' setup, descriptions and skeleton codes goes to Prof. Hutter and his teaching assistants.
 
+
 ## Exercise 1: Forward, Differential and Inverse Kinematics of the ABB IRB 120
 The aim of this exercise was to calculate the forward, differential and inverse kinematics of the 6-link ABB IRB 120 robot arm with fixed base seen below (with and without associated Cartesian frames). This helped practice the use of different representations of the end-fector's orientation as well as provided a tool to check whether practical implementations of the kinematics were correct. The task was to implement the functions for computing the forward and inverse kinematics using symbolic and numerical computations in MATLAB. A separate MATLAB script allowed to visualize the robot arm in 3D.
 
@@ -34,6 +35,7 @@ As a result of implementating all the kinematics correctly, an animation of the 
   <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex1c.gif width="700" title="Ex1 Result Path Following Robot Arm">
 </p>
 
+
 ## Exercise 2: Dynamics and Model-based control of the ABB IRB 120
 The aim of this exercise was to develop a tool which implements the equations of motion for the same ABB robot arm, as well as implementing control algorithms focused on model-based control schemes.
 
@@ -43,16 +45,6 @@ the total mechanical energy of the system.
 2) This can be validated via the calculation and tracking of the total energy (= Hamiltonian, e.g., if no external forces are acting on the system, the total mechanical energy should remain constant over time).
 
 The following visualizes the robot moving when certain torques are applied to different joints, with the corresponding effect on the total energy:<p align="center">
-  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2a.gif width="700" title="Ex2a Result Robot Arm Torques and Total Energy">
-</p>
-
-## Exercise 2a: Dynamics of the ABB IRB 120
-1) Generating all the quantities (mass matrix, Coriolis, centrifugal and gravity terms) which are used in the equations of motion, as well as
-the total mechanical energy of the system. 
-2) This can be validated via the calculation and tracking of the total energy (= Hamiltonian, e.g., if no external forces are acting on the system, the total mechanical energy should remain constant over time).
-
-The following visualizes the robot moving when certain torques are applied to different joints, with the corresponding effect on the total energy:
-<p align="center">
   <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2a.gif width="700" title="Ex2a Result Robot Arm Torques and Total Energy">
 </p>
 
@@ -72,3 +64,54 @@ Coding of three controllers which use the dynamic model of the arm to perform mo
   <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex2b_HybridForceMotionControl.gif height="250" title="Ex2b Hybrid Force and Motion Controller on Robot Arm">
 </p>
 
+
+## Exercise 3: Controlling a Legged Robot
+Implementation of control algorithms for a simplified legged robot. The objective was to implement two controllers which, respectively, enable the tracking of a desired motion for the torso (i.e. base) and desired motion and force for the arm (i.e. end-effector), employing a hierarchical optimization scheme that will enable the system to execute the aforementioned tasks while also respecting a set of necessary constraints.
+A planar simplication of the studied quadrupedal systems equipped with a manipulator can be seen in the following figure:
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex3_Frames.PNG width="700" title="Ex3 Simplified Quadruped Robot System with Frames">
+</p>
+The exercise restricts motion to the X-Z plane, each pair of front and hind legs is modelled by a single articulated limb, which supports a free-floating base. Additionally, an articulated arm limb is attached for manipulation tasks. The underlying system is shown in the following schematic:
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex3_SystemOverview.PNG width="700" title="Ex3 System Overview Schematic">
+</p>
+The method used consists in re-formulating the Hierarchical Optimization (HO) problem as a Quadratic Program (QP) to compute optimal torques, given a set of carefully selected costs and constraints.
+
+1) Floating-Base Motion Control: Implement a controller to track Cartesian pose and velocity references for the base of the robot. These references should result in the base moving in a circular trajectory in the X-Z plane, while maintaining a constant attitude parallel with the floor. This resulting movement can indeed be observed in the following visualization:
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex3_Floating_Base_Control.gif width="700" title="Ex3 Floating Base Controller on Quadruped">
+</p>
+2) Hybrid Force-Motion Control: Extend and adapt the formulation of the previous problem, but now also control the interaction force acting between the end-effector and the wall. Essentially, the end-effector is used to additionally push against a wall at a fixed spot. The interaction forces of the robot gripper with the wall are clearly observable in the following capture:
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex3_Hybrid_Force_Motion_Control.gif width="700" title="Ex3 Hybrid Force Motion Controller on Quadruped">
+</p>
+
+
+## Exercise 4: Modeling and Control of a Multicopter
+The aim of this exercise was to derive the full dynamic model of a hexacopter and to implement control algorithms to stabilize the platform attitude and to achieve velocity reference tracking. The hexacopter model with all associated frames, spinning directions as well as forces and torques acting on the vehicle and inertial and body frames can be seen here:
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex4_Hexacopter_Frames.PNG width="700" title="Ex4 Hexacopter Model">
+</p>
+
+1) The full dynamic model of a hexacopter was derived on paper assuming that the vehicle is a rigid body. The dynamic model has to be represented as a set of ordinary differential equations.
+2) An attitude PD controller and velocity P controller were designed and evaluated using MATLAB and SIMULINK. The control structure is depicted in hereafter, the vehicle model is divided into 2 subsystems, namely the attitude dynamics and the translational dynamics.
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex4_Control_Structure.PNG width="700" title="Ex4 Hexacopter Control Structure">
+</p>
+The outer loop controller (velocity controller) generates commands to the inner loop controller (attitude controller). The commands (total thrust and moments) are converted into rotor speeds. Resulting vehicle dynamics plots given some desired velocities in the body frame simulated in SIMULINK can be seen in the following:
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex4_Vel.PNG width="700" title="Ex4 Vehicle Dynamics Simulation">
+</p>
+
+
+## Exercise 5: Fixed-wing UAV Simulation and Control
+The aim is the familiarization with typical fixed-wing UAV dynamics, how the model derived in theory may be simulated, and how one may control the various low- and high- level states of the vehicle. The overall control architecture can be seen in this figure:
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex5_Control_Architecture.PNG width="700" title="Ex5 Fixed-Wing UAV Control Architecture">
+</p>
+1) Find a set of manual control deflections (and throttle setting) in order to stabilize straight, level, and steady flight in open loop for the body-x-axis airspeed component.
+2) Implement a cascaded-PID control scheme to track attitude setpoints and damp attitude rates, airspeed and altitude control via a total energy control system (TECS) as well as lateral-directional position control (L1 position control).
+With all these implemented, the UAV is able to accurately follow a circular motion, even under the influence of external disturbances such as wind. The resulting motion can be observed in the graph on the bottom right, along with other tracked variables:
+<p align="center">
+  <img src=https://github.com/ischollETH/robot-dynamics-ETH/blob/main/images/RD_Ex5_Plots.PNG width="700" title="Ex5 UAV Circle Following Plots">
+</p>
